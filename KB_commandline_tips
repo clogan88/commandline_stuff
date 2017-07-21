@@ -1,0 +1,75 @@
+Notes on Treebeard
+Author Kirsten Boyer 2016Apr09
+
+Treebeard is the Linux server used by the LoganLab for storing transcriptomic data and running analyses. Students can be given access by setting up an IT helpdesk ticket. Anyone with an s at the end of their username has admin access.
+
+Step 1: Log in to treebeard__________________________________________________________ 
+your username is usually your otterID
+
+$ ssh username@treebeard.csumb.edu
+
+input password (generally your otterID password at time of account setup)
+
+
+Move files to and from the server____________________________________________________
+Open two terminal windows. In one, navigate to the directory on your computer where you want to receive/send file. In the other, log on to treebeard and navigate to the file receive/send. Once there, use pwd to print the working directory then copy to use in below commands. From the computer directory window, use the following commands to send/receive the files.
+
+send file to server:
+$ scp /file/to/send username@treebeard.csumb.edu:/where/to/put
+
+receive file from server:
+$ scp username@treebeard.csumb.edu:/file/to/send /where/to/put
+
+move files between two servers:
+$ scp username@treebeard.csumb.edu:/file/to/send username@remote:/where/to/put
+	
+
+Create groups and add users__________________________________________________________
+To create groups, you need admin rights. To use admin access use su or sudo 
+$ sudo groupadd <groupname>
+
+Add users to groups:
+$ sudo usermod -a -G <groupname> <username>
+
+
+Make new directories, check directory ownership, groups, and permissions____________
+To make a new directory, use mkdir <filename>. To then check on the user and group ownerships and permissions, use: 
+
+$ ll
+
+
+Change ownership of a directory______________________________________________________
+Users who own the directory can change the group of their directory. In our case, it is best for everyone who creates a directory where other people may need to work to change Group to LoganLab (currently includes Cheryl, Kirsten Boyer, Jake Cline, and Nate Jue). If only a userowner is given, no change is made to group ownership. The -R option makes the command recursive, so all subdirectory ownership is also changed.
+
+$ chown -R userowner:groupowner <filename>
+
+
+Change directory/file permissions____________________________________________________
+chmod changes permissions on files/directories. You can change user -u, group -g, and other -o on read (r) write (w) and execute (x). See example below. You can also use numeric representations (example: 7=all permissions, 5=read, no write, execute, 4=read only)
+
+$ chmod u=rwx,g=rx,o=r <filename>
+$ chmod 754 <filename>
+
+
+Identify the amount of space available in the server_________________________________
+Nate used sudo df to get an idea of the hard drive size and how much space was available then du -hs * to identify the size of individual directories.
+
+$ sudo df
+$ sudo du -hs *
+
+
+Create symbolic links________________________________________________________________
+Using symbolic links, users can do analyses on data in their own folder without making copies. However, the original data cannot be compressed. Go into the directory where you want the symbolic link then run following line:
+
+$ sudo ln -s <full path to data file> .
+
+the symbolic link will show up in your current working directory in light blue.
+
+
+
+
+
+
+
+
+
