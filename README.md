@@ -1,2 +1,2 @@
 # commandline_stuff
-general command line tools and scripts
+general command line notes, tips, tools and examples from computing workshops
