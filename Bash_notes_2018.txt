@@ -1,4 +1,4 @@
-Software Carpentry Notes
+  Software Carpentry Notes
 1-19-2018
 
 # UNIX AND BASH NOTES
@@ -67,3 +67,5 @@ git checkout master 		# goes back to most recent version
 git checkout 8ed2433 # revert back to a previous committ
 
 	
+# SAL >> I think i figured out how I was getting conflict.
+# pulling (from cmd line) different branches from the 'head'
