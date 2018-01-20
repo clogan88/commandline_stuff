@@ -1,0 +1,69 @@
+Software Carpentry Notes
+1-19-2018
+
+# UNIX AND BASH NOTES
+
+# PIPING COMMANDS TOGETHER
+# cut out 2nd column from file (animals.txt), sort, and extract only unique names
+# d is the delimiter which is a comma and f2 is 2nd column:
+# save output to outfile.txt
+
+cut -d, -f2 animals.txt| sort | uniq > outfile.txt
+
+# USING GREP ON COMMAND LINE 
+grep -w "The Tao" haiku.txt # find words that have "The Tao" 
+grep -c "The Tao" haiku.txt  # count the # of times
+grep -nwv "the" haiku.txt
+grep -E '^.o' haiku.txt # find lines where 'o' is the 2nd letter in the line
+
+# USING FIND ON COMMAND LINE
+find . -type d  # show all directories and sub-directories
+find . -type f  # show all filenames
+
+# COMBINING GREP AND FIND COMMANDS
+grep "FE" $(find -name '*.pdb')
+
+# WRITING for loop IN BASH (must use . after the $f )
+for filename in *.pdb
+do
+	head -n 2 $filename > $filename.head_tail2.txt # write to new file
+	tail -n 2 $filename >> $filename.head_tail2.txt # append to same file
+done
+
+
+
+
+Software Carpentry Notes
+1-20-2018
+
+# GIT NOTES
+
+# don't track files that you can generate from a program
+
+# to start git tracking a folder on command line, go into folder and initialize
+git init
+git status          	# get status of it
+git add filename.txt	# git will now track this file
+# also record a short, descriptive comment to remember later on what we did and why
+git commit -m "Start notes on Mars as a base"   #also needed to track
+git log  				# shows history of all commits in a repository
+
+# COMMITING CHANGES - don't need to commit all the time
+# before committing, look at differences bn two files and commit again
+git diff
+git add mars.txt 	#(git add *.txt)  # MUST "ADD" AND "COMMIT"
+git commit -m "added a new line"
+
+git diff HEAD~1 mars.txt  #look at diff between current and previous commit
+
+git log  #
+git diff 8ed2433 174ed10   #look at difference between two commits
+
+# go back to a previous version and start a new branch if you want
+git checkout 8ed2433
+git checkout -b 'mistake_branch' # name new branch
+git checkout master 		# goes back to most recent version
+
+git checkout 8ed2433 # revert back to a previous committ
+
+	
